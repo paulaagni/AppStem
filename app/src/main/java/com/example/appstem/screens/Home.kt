@@ -1,6 +1,7 @@
 package com.example.appstem.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,11 +33,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.appstem.R
 import com.example.appstem.ui.theme.AppStemTheme
+import androidx.compose.foundation.layout.aspectRatio
+
 
 
 
@@ -147,7 +152,21 @@ fun HomeContent(navController: NavController, innerPadding: PaddingValues) {
         verticalArrangement = Arrangement.Center, // Centra verticalmente
         horizontalAlignment = Alignment.CenterHorizontally // Centra horizontalmente
     ) {
+        Image(
+            painter = painterResource(R.drawable.homeimagena),
+            contentDescription = "Imagen Home A",
+            modifier = Modifier
+                .fillMaxWidth(0.8f) // 80% del ancho disponible
+                .aspectRatio(1f) // Mantener la relación de aspecto cuadrada
+        )
 
+        Image(
+            painter = painterResource(R.drawable.homeimagenb),
+            contentDescription = "Imagen Home B",
+            modifier = Modifier
+                .fillMaxWidth(0.8f) // 80% del ancho disponible
+                .aspectRatio(1f) // Mantener la relación de aspecto cuadrada
+        )
     }
 }
 
