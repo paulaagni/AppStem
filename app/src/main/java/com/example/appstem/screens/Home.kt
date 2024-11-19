@@ -149,12 +149,7 @@ fun HomeContent(navController: NavController, innerPadding: PaddingValues) {
         verticalArrangement = Arrangement.Center, // Centra verticalmente
         horizontalAlignment = Alignment.CenterHorizontally // Centra horizontalmente
     ) {
-        androidx.compose.foundation.Image(
-            painter = androidx.compose.ui.res.painterResource(id = R.drawable.homeimagen1.png),
-            contentDescription = "Imagen Home",
 
-
-        )
     }
 }
 
