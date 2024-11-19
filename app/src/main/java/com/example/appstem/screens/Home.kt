@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -16,7 +18,6 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -24,7 +25,6 @@ import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appstem.navigation.AppScreens
+import com.example.appstem.ui.theme.AppStemTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -49,10 +50,6 @@ fun Home(navController: NavController) {
     Scaffold(
         topBar = {
             LargeTopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.White,
-                    titleContentColor = Color.Black
-                ),
                 title = {
                     Column(
                         modifier = Modifier.padding(vertical = 8.dp)
@@ -66,13 +63,12 @@ fun Home(navController: NavController) {
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             )
         },
         bottomBar = {
             BottomAppBar(
-                containerColor = Color.White, // Fondo blanco
-                contentColor = Color.Black, // Texto negro
                 modifier = Modifier.padding(bottom = 8.dp) // Espacio abajo
             ) {
                 Row(
@@ -95,7 +91,6 @@ fun Home(navController: NavController) {
                         Text(
                             text = "Biografías",
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.Black,
                             modifier = Modifier.padding(top = 4.dp) // Espacio entre el ícono y el texto
                         )
                     }
@@ -114,7 +109,6 @@ fun Home(navController: NavController) {
                         Text(
                             text = "Citas",
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.Black,
                             modifier = Modifier.padding(top = 4.dp) // Espacio entre el ícono y el texto
                         )
                     }
@@ -133,7 +127,6 @@ fun Home(navController: NavController) {
                         Text(
                             text = "Favoritas",
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.Black,
                             modifier = Modifier.padding(top = 8.dp) // Espacio entre el ícono y el texto
                         )
                     }
@@ -146,31 +139,31 @@ fun Home(navController: NavController) {
 }
 
 @Composable
-fun HomeContent(navController: NavController,innerPadding: PaddingValues) {
+fun HomeContent(navController: NavController, innerPadding: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(innerPadding)
-            .background(Color.White),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(innerPadding),
+        verticalArrangement = Arrangement.Center, // Centra verticalmente
+        horizontalAlignment = Alignment.CenterHorizontally // Centra horizontalmente
     ) {
-        ElevatedButton(onClick = {
-            navController.navigate(route = AppScreens.ScrollBios.route)
-        },
-            colors = ButtonDefaults.elevatedButtonColors(
-                containerColor = Color(0xFF65558F),
-                contentColor = Color.White
-            )
+        ElevatedButton(
+            onClick = {
+                navController.navigate(route = AppScreens.ScrollBios.route)
+            },
+            modifier = Modifier.fillMaxWidth(0.5f) // El botón será más pequeño y no ocupará todo el ancho
         ) {
             Text("Comenzar")
         }
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun HomePreview() {
-    Home(navController = rememberNavController())
+    AppStemTheme {
+        Home(navController = rememberNavController())
+    }
 }
 

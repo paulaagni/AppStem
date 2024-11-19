@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,6 +27,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appstem.R
 import com.example.appstem.navigation.AppScreens
+import com.example.appstem.ui.theme.AppStemTheme
 
 data class DatosBios(
     val name: String,
@@ -47,16 +49,16 @@ fun ScrollBios(navController: NavController) {
 
     val busquedaBarra = remember { mutableStateOf("") }
 
-    Scaffold(
-        containerColor = Color.White,
-        topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.White,
-                    titleContentColor = Color.Black
+    AppStemTheme{
+        Scaffold(
+            topBar = {
+
+                TopAppBar(
+                    colors = TopAppBarDefaults.topAppBarColors(
                 ),
-                title = {
-                    Row(
+                    title = { 
+
+                        Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
@@ -65,37 +67,27 @@ fun ScrollBios(navController: NavController) {
                             modifier = Modifier
                                 .size(24.dp)
                                 .padding(end = 8.dp)
-                                .clickable{navController.popBackStack()}
+                                .clickable { navController.popBackStack() }
                         )
                         Text("Biografías")
+                        }
                     }
-                }
-            )
-        },
-        content = { paddingValues ->
-            Column(modifier = Modifier
-                .padding(paddingValues)
-                .padding(16.dp)
-                .background(Color.White)
-            ){
+                )
+                     },
+            content = { paddingValues ->
+                Column(
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .padding(16.dp)
+                        .background(Color.White)
+                ) {
                 TextField(
                     value = busquedaBarra.value,
                     onValueChange = { busquedaBarra.value = it },
-                    label = { Text("Buscar", color = Color.Black) },
+                    label = { Text("Buscar") },
                     leadingIcon = {
                         Icon(imageVector = Icons.Filled.Search, contentDescription = "Buscar")
                     },
-                    colors = TextFieldDefaults.colors(
-                        focusedTextColor = Color.Black,
-                        unfocusedTextColor = Color.Black,
-                        disabledTextColor = Color.Gray,
-                        errorTextColor = Color.Red,
-                        focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White,
-                        cursorColor = Color.Black,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent
-                    ),
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp)
                 )
@@ -112,12 +104,10 @@ fun ScrollBios(navController: NavController) {
                                 .fillMaxWidth()
                                 .padding(8.dp)
                                 .clickable {
-                                    if(item.name == "Hypatia de Alejandría")
+                                    if (item.name == "Hypatia de Alejandría")
                                         navController.navigate(route = AppScreens.Bio.route)
                                 },
-                            colors = CardDefaults.cardColors(
-                                containerColor = Color.White
-                            ),
+
                             elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                             border = BorderStroke(1.dp, Color(0xFFCAC4D0))
                         ) {
@@ -131,13 +121,12 @@ fun ScrollBios(navController: NavController) {
                                 Column {
                                     Text(
                                         text = item.name,
-                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Bold,
                                         overflow = TextOverflow.Ellipsis,
                                         maxLines = 1
                                     )
                                     Text(
                                         text = item.profession,
-                                        style = MaterialTheme.typography.titleSmall,
                                         modifier = Modifier.padding(top = 4.dp)
                                     )
                                 }
@@ -146,9 +135,9 @@ fun ScrollBios(navController: NavController) {
                                     painter = painterResource(id = item.imagenId),
                                     contentDescription = null,
                                     modifier =
-                                    if (item.imagenId == R.drawable.maryanning || item.imagenId == R.drawable.hedylamarr || item.imagenId == R.drawable.rachelcarson){
+                                    if (item.imagenId == R.drawable.maryanning || item.imagenId == R.drawable.hedylamarr || item.imagenId == R.drawable.rachelcarson) {
                                         Modifier.size(70.dp)
-                                    }else {
+                                    } else {
                                         Modifier.size(50.dp)
                                     }
                                         .padding(start = 8.dp)
@@ -157,13 +146,16 @@ fun ScrollBios(navController: NavController) {
                         }
                     }
                 }
+                }
             }
-        }
-    )
+        )
+    }
 }
 
 @Preview (showBackground = true)
 @Composable
 fun ScrollBiosPreview(){
-    ScrollBios(navController = rememberNavController())
+    AppStemTheme {
+        ScrollBios(navController = rememberNavController())
+    }
 }
