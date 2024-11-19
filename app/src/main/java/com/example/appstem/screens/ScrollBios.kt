@@ -22,21 +22,19 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.appstem.DatosBios
 import com.example.appstem.R
 import com.example.appstem.navigation.AppScreens
 import com.example.appstem.ui.theme.AppStemTheme
 
-data class DatosBios(
-    val name: String,
-    val profession: String,
-    val imagenId: Int
-)
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -66,13 +64,13 @@ fun ScrollBios(navController: NavController) {
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "ArrowBack",
+                            contentDescription = "null",
                             modifier = Modifier
                                 .size(24.dp)
                                 .padding(end = 8.dp)
                                 .clickable { navController.popBackStack() }
                         )
-                        Text("Biografías")
+                        Text(stringResource(R.string.biografias))
                         }
                     }
                 )
@@ -82,14 +80,13 @@ fun ScrollBios(navController: NavController) {
                     modifier = Modifier
                         .padding(paddingValues)
                         .padding(16.dp)
-                        .background(Color.White)
                 ) {
                 TextField(
                     value = busquedaBarra.value,
                     onValueChange = { busquedaBarra.value = it },
-                    label = { Text("Buscar") },
+                    label = { Text(stringResource(R.string.buscar)) },
                     leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Search, contentDescription = "Buscar")
+                        Icon(imageVector = Icons.Filled.Search, contentDescription = "null")
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp)

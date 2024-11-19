@@ -33,10 +33,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.appstem.R
 import com.example.appstem.navigation.AppScreens
 import com.example.appstem.ui.theme.AppStemTheme
 
@@ -55,11 +57,12 @@ fun Home(navController: NavController) {
                         modifier = Modifier.padding(vertical = 8.dp)
 
                     ) {
-                        Text("Pioneras",
+                        Text(
+                            stringResource(R.string.pioneras),
                             style = MaterialTheme.typography.titleLarge
                         )
                         Text(
-                            "Mujeres que cambiaron la ciencia",
+                            stringResource(R.string.mujeres_que_cambiaron_la_ciencia),
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }
@@ -79,9 +82,10 @@ fun Home(navController: NavController) {
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier  .clickable(onClick = {
-                            activeIcon = "biografias"
-                        })
+                        modifier = Modifier
+                            .clickable(onClick = {
+                                activeIcon = "biografias"
+                            })
                             .background(
                                 if (activeIcon == "biografias") Color(0xFFE8DEF8) else Color.Transparent
                             )
@@ -89,7 +93,7 @@ fun Home(navController: NavController) {
                     ) {
                         Icon(Icons.Filled.AccountCircle, contentDescription = "Biografías")
                         Text(
-                            text = "Biografías",
+                            text = stringResource(R.string.biograf_as),
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(top = 4.dp) // Espacio entre el ícono y el texto
                         )
@@ -97,9 +101,10 @@ fun Home(navController: NavController) {
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier .clickable(onClick = {
-                            activeIcon = "citas"
-                        })
+                        modifier = Modifier
+                            .clickable(onClick = {
+                                activeIcon = "citas"
+                            })
                             .background(
                                 if (activeIcon == "citas") Color(0xFFE8DEF8) else Color.Transparent
                             )
@@ -107,7 +112,7 @@ fun Home(navController: NavController) {
                     ) {
                         Icon(Icons.Filled.Create, contentDescription = "Citas")
                         Text(
-                            text = "Citas",
+                            text = stringResource(R.string.citas),
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(top = 4.dp) // Espacio entre el ícono y el texto
                         )
@@ -115,9 +120,10 @@ fun Home(navController: NavController) {
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier .clickable(onClick = {
-                            activeIcon = "favoritas"
-                        })
+                        modifier = Modifier
+                            .clickable(onClick = {
+                                activeIcon = "favoritas"
+                            })
                             .background(
                                 if (activeIcon == "favoritas") Color(0xFFE8DEF8) else Color.Transparent
                             )
@@ -125,7 +131,7 @@ fun Home(navController: NavController) {
                     ) {
                         Icon(Icons.Filled.FavoriteBorder, contentDescription = "Favoritas")
                         Text(
-                            text = "Favoritas",
+                            text = stringResource(R.string.favoritas),
                             style = MaterialTheme.typography.bodySmall,
                             modifier = Modifier.padding(top = 8.dp) // Espacio entre el ícono y el texto
                         )
