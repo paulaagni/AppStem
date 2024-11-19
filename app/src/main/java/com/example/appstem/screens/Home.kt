@@ -18,7 +18,6 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeTopAppBar
@@ -37,8 +36,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.appstem.navigation.AppScreens
 import com.example.appstem.ui.theme.AppStemTheme
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
+import com.example.appstem.R
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -147,14 +149,12 @@ fun HomeContent(navController: NavController, innerPadding: PaddingValues) {
         verticalArrangement = Arrangement.Center, // Centra verticalmente
         horizontalAlignment = Alignment.CenterHorizontally // Centra horizontalmente
     ) {
-        ElevatedButton(
-            onClick = {
-                navController.navigate(route = AppScreens.ScrollBios.route)
-            },
-            modifier = Modifier.fillMaxWidth(0.5f) // El botón será más pequeño y no ocupará todo el ancho
-        ) {
-            Text("Comenzar")
-        }
+        androidx.compose.foundation.Image(
+            painter = androidx.compose.ui.res.painterResource(id = R.drawable.homeimagen1.png),
+            contentDescription = "Imagen Home",
+
+
+        )
     }
 }
 
