@@ -1,6 +1,6 @@
 package com.example.appstem.screens
+
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,16 +13,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -34,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appstem.R
+import com.example.appstem.ui.theme.AppStemTheme
 
 
 @Composable
@@ -41,7 +39,6 @@ fun BiografiaHypatia(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
             .padding(16.dp)
     ) {
         Column(
@@ -50,7 +47,7 @@ fun BiografiaHypatia(navController: NavController) {
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Espaciador al inicio para evitar que todo el contenido se pegue al borde superior
+
             Spacer(modifier = Modifier.height(32.dp))
 
             Image(
@@ -59,7 +56,6 @@ fun BiografiaHypatia(navController: NavController) {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(150.dp)
-                    .background(Color.Gray, CircleShape)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -73,7 +69,6 @@ fun BiografiaHypatia(navController: NavController) {
                 )
                 Text(
                     text = stringResource(R.string.ocupacion_hypatia),
-                    color = Color.Gray,
                     fontSize = 16.sp
                 )
 
@@ -87,7 +82,6 @@ fun BiografiaHypatia(navController: NavController) {
 
                     Text(
                         text = stringResource(R.string.subtitulo),
-                        color = Color.Gray,
                         fontSize = 14.sp,
                         textAlign = TextAlign.Center
                     )
@@ -113,12 +107,10 @@ fun BiografiaHypatia(navController: NavController) {
             ) {
                 Button(
                     onClick = { /* Acción para Favoritas */ },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEDE7F6)),
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     Text(
-                        text = stringResource(R.string.boton_favoritas),
-                        color = Color(0xFF673AB7)
+                        text = stringResource(R.string.boton_favoritas)
                     )
                 }
 
@@ -126,12 +118,10 @@ fun BiografiaHypatia(navController: NavController) {
 
                 Button(
                     onClick = { navController.popBackStack() }, // Volver a la pantalla anterior
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF673AB7)),
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     Text(
                         text = stringResource(R.string.boton_volver),
-                        color = Color.White
                     )
                 }
             }
@@ -139,12 +129,13 @@ fun BiografiaHypatia(navController: NavController) {
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewBiografiaHypatia() {
-    val navController = rememberNavController()
-    BiografiaHypatia(navController)
+    AppStemTheme {
+        val navController = rememberNavController()
+        BiografiaHypatia(navController)
+    }
 }
 
 
