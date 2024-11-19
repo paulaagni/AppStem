@@ -37,9 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appstem.ui.theme.AppStemTheme
-import androidx.compose.foundation.Image
-import androidx.compose.ui.res.painterResource
-import com.example.appstem.R
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
