@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AppStem</string>
+    <string name="home">Home</string>
+    <string name="biografias">Biografías</string>
+    <string name="favoritas">Favoritas</string>
+    <string name="citas">Citas</string>
 </resources>

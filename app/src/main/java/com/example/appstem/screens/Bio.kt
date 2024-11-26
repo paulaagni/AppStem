@@ -60,7 +60,7 @@ fun BiografiaHypatia(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Puedes seguir ajustando aquí según sea necesario
+
             Column(horizontalAlignment = Alignment.Start) {
                 Text(
                     text = stringResource(R.string.nombre_hypatia),
