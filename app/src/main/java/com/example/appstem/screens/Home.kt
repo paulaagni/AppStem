@@ -3,8 +3,10 @@ package com.example.appstem.screens
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -41,8 +43,12 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appstem.R
 import com.example.appstem.ui.theme.AppStemTheme
 import androidx.compose.foundation.layout.aspectRatio
-
-
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,22 +60,44 @@ fun Home(navController: NavController) {
 
     Scaffold(
         topBar = {
-            LargeTopAppBar(
+            TopAppBar(
                 title = {
-                    Column(
-                        modifier = Modifier.padding(vertical = 8.dp)
-
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp), // Espaciado uniforme
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text("Pioneras",
-                            style = MaterialTheme.typography.titleLarge
+                        // Espacio para el ícono de la app
+                        Image(
+                            painter = painterResource(R.drawable.ic_launcher_foreground), // Reemplaza con tu recurso de ícono
+                            contentDescription = "Icono de la app",
+                            modifier = Modifier
+                                .size(48.dp)
+                                .clip(RoundedCornerShape(8.dp)) // Bordes redondeados
+                                .background(Color(0xFFE8DEF8)) // Fondo suave detrás del ícono
+                                .padding(8.dp) // Espacio interno
                         )
-                        Text(
-                            "Mujeres que cambiaron la ciencia",
-                            style = MaterialTheme.typography.bodyMedium
-                        )
+                        Spacer(modifier = Modifier.width(16.dp)) // Separación entre ícono y texto
+
+                        // Títulos de la barra superior
+                        Column {
+                            Text(
+                                text = "Pioneras",
+                                style = MaterialTheme.typography.titleLarge.copy(
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            )
+                            Text(
+                                text = "Mujeres que cambiaron la ciencia",
+                                style = MaterialTheme.typography.bodyMedium.copy(
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
+                            )
+                        }
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
+                },
+                modifier = Modifier.shadow(4.dp) // Sombra para destacar el TopAppBar
             )
         },
         bottomBar = {
@@ -149,26 +177,59 @@ fun HomeContent(navController: NavController, innerPadding: PaddingValues) {
         modifier = Modifier
             .fillMaxSize()
             .padding(innerPadding),
-        verticalArrangement = Arrangement.Center, // Centra verticalmente
-        horizontalAlignment = Alignment.CenterHorizontally // Centra horizontalmente
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(R.drawable.homeimagena),
-            contentDescription = "Imagen Home A",
-            modifier = Modifier
-                .fillMaxWidth(0.8f) // 80% del ancho disponible
-                .aspectRatio(1f) // Mantener la relación de aspecto cuadrada
-        )
+        val imageModifier = Modifier
+            .fillMaxWidth(0.80f) // Ajusta el ancho al 75% de la pantalla
+            .height(200.dp) // Define una altura fija para todas las imágenes
+            .padding(vertical = 8.dp) // Espaciado uniforme entre imágenes
+            .border(
+                width = 1.dp,
+                color = Color.Gray.copy(alpha = 0.8f),
+                shape = RoundedCornerShape(10.dp)
+            )
+            .shadow(
+                elevation = 6.dp,
+                shape = RoundedCornerShape(10.dp)
+            )
+            .clip(RoundedCornerShape(10.dp))
+            .clickable {
+                // Acción de navegación al hacer clic
+            }
 
-        Image(
-            painter = painterResource(R.drawable.homeimagenb),
-            contentDescription = "Imagen Home B",
-            modifier = Modifier
-                .fillMaxWidth(0.8f) // 80% del ancho disponible
-                .aspectRatio(1f) // Mantener la relación de aspecto cuadrada
-        )
+        // Imagen 1
+        Box(modifier = imageModifier) {
+            Image(
+                painter = painterResource(R.drawable.homeimagena),
+                contentDescription = "Imagen Home A",
+                contentScale = ContentScale.Crop, // Recorta para llenar el espacio definido
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        // Imagen 2
+        Box(modifier = imageModifier) {
+            Image(
+                painter = painterResource(R.drawable.homeimagenc),
+                contentDescription = "Imagen Home C",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        // Imagen 3
+        Box(modifier = imageModifier) {
+            Image(
+                painter = painterResource(R.drawable.homeimagenb),
+                contentDescription = "Imagen Home B",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
     }
 }
+
 
 
 @Preview(showBackground = true)
