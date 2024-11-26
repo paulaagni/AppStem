@@ -6,7 +6,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.appstem.ItemsMenu
 import com.example.appstem.screens.BiografiaHypatia
 import com.example.appstem.screens.Home
 import com.example.appstem.screens.ScrollBios
