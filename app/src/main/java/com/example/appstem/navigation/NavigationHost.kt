@@ -13,7 +13,6 @@ import com.example.appstem.ui.theme.AppStemTheme
 
 @Composable
 fun NavigationHost(navController: NavHostController) {
-    // Aplicar el tema a todo el NavHost
     AppStemTheme {
         NavHost(
             navController = navController,
