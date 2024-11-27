@@ -48,7 +48,6 @@ import com.example.appstem.ui.theme.AppStemTheme
 fun Home(navController: NavController) {
 
     var activeIcon by remember { mutableStateOf("") }
-
     Scaffold(
         topBar = {
             LargeTopAppBar(

@@ -66,7 +66,6 @@ fun ScrollBios(navController: NavController) {
     AppStemTheme{
         Scaffold(
             topBar = {
-
                 TopAppBar(
                     colors = TopAppBarDefaults.topAppBarColors(
                 ),
