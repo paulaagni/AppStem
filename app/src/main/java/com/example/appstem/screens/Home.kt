@@ -109,9 +109,10 @@ fun Home(navController: NavController) {
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier  .clickable(onClick = {
-                            activeIcon = "biografias"
-                        })
+                        modifier = Modifier
+                            .clickable(onClick = {
+                                activeIcon = "biografias"
+                            })
                             .background(
                                 if (activeIcon == "biografias") Color(0xFFE8DEF8) else Color.Transparent
                             )
@@ -127,9 +128,10 @@ fun Home(navController: NavController) {
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier .clickable(onClick = {
-                            activeIcon = "citas"
-                        })
+                        modifier = Modifier
+                            .clickable(onClick = {
+                                activeIcon = "citas"
+                            })
                             .background(
                                 if (activeIcon == "citas") Color(0xFFE8DEF8) else Color.Transparent
                             )
@@ -145,9 +147,10 @@ fun Home(navController: NavController) {
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier .clickable(onClick = {
-                            activeIcon = "favoritas"
-                        })
+                        modifier = Modifier
+                            .clickable(onClick = {
+                                activeIcon = "favoritas"
+                            })
                             .background(
                                 if (activeIcon == "favoritas") Color(0xFFE8DEF8) else Color.Transparent
                             )
