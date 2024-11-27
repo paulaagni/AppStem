@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">AppStem</string>
+    <string name="icono_inicial">H</string>
+    <string name="nombre_hypatia">Hypatia</string>
+    <string name="ocupacion_hypatia">Matemática</string>
+    <string name="titulo_principal">Hypatia de Alejandría</string>
+    <string name="subtitulo">La luz del saber en la antigüedad</string>
+    <string name="descripcion_hypatia">Hipatia de Alejandría (c. 355-415 d.C.) fue una destacada filósofa, matemática y astrónoma de la antigua ciudad de Alejandría, Egipto. Considerada una de las primeras mujeres científicas de la historia, Hipatia se destacó por sus conocimientos y enseñanzas en un momento en que el papel de las mujeres en la academia era limitado. Hija del matemático y filósofo Teón, Hipatia recibió una educación avanzada y pronto superó a su padre en diversos campos del saber. Se convirtió en una figura central de la Escuela Neoplatónica de Alejandría</string>
+    <string name="boton_favoritas">Favoritas</string>
+    <string name="boton_volver">Volver</string>
+    <string name="descripcion_imagen">Imagen de Hypatia</string>
+    <string name="biografias">Biografías</string>
+    <string name="buscar">Buscar</string>
+    <string name="pioneras">Pioneras</string>
+    <string name="mujeres_que_cambiaron_la_ciencia">Mujeres que cambiaron la ciencia</string>
+    <string name="biograf_as">Biografías</string>
+    <string name="citas">Citas</string>
+    <string name="favoritas">Favoritas</string>
 </resources>
