@@ -16,8 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.appstem.model.ItemsMenu
 import com.example.appstem.ui.theme.AppStemTheme
-import com.example.appstem.ItemsMenu.*
+import com.example.appstem.model.ItemsMenu.*
 import com.example.appstem.navigation.AppScreens
 import com.example.appstem.navigation.NavigationHost
 
@@ -61,24 +62,26 @@ fun currentRoute(navController: NavHostController): String? {
 }
 @Composable
 fun BottomNavigation(navController: NavHostController, menuItems: List<ItemsMenu>) {
-    BottomAppBar {
-        NavigationBar {
-            val currentRoute = currentRoute(navController)
-            menuItems.forEach { item ->
-                NavigationBarItem(
-                    icon = { Icon(item.icon, contentDescription = item.title) },
-                    label = { Text(text = item.title) },
-                    selected = currentRoute == item.route,
-                    onClick = {
-                        item.route?.let { route ->
-                            if (currentRoute != route) {
-                                navController.navigate(route)
+    AppStemTheme {
+        BottomAppBar {
+            NavigationBar {
+                val currentRoute = currentRoute(navController)
+                menuItems.forEach { item ->
+                    NavigationBarItem(
+                        icon = { Icon(item.icon, contentDescription = item.title) },
+                        label = { Text(text = item.title) },
+                        selected = currentRoute == item.route,
+                        onClick = {
+                            item.route?.let { route ->
+                                if (currentRoute != route) {
+                                    navController.navigate(route)
+                                }
                             }
-                        }
-                        // Si route es null, no se hace nada.
-                    },
-                    alwaysShowLabel = false
-                )
+                            // Si route es null, no se hace nada.
+                        },
+                        alwaysShowLabel = false
+                    )
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.appstem
+package com.example.appstem.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
