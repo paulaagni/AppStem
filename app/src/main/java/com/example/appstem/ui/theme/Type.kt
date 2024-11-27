@@ -16,7 +16,13 @@ val AppTypography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 57.sp,
         lineHeight = 64.sp
-    )
+    ),
+    titleLarge = TextStyle(
+        fontFamily = SanFranciscoFont,
+        fontWeight = FontWeight.Bold,
+        fontSize = 35.sp,
+        lineHeight = 28.sp
+    ),
 )
 
 

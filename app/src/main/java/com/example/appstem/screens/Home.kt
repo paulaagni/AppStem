@@ -68,12 +68,11 @@ fun Home(navController: NavController) {
                     ) {
                         // Espacio para el ícono de la app
                         Image(
-                            painter = painterResource(R.drawable.ic_launcher_foreground), // Reemplaza con tu recurso de ícono
+                            painter = painterResource(R.drawable.logorecortado), // Reemplaza con tu recurso de ícono
                             contentDescription = "Icono de la app",
                             modifier = Modifier
-                                .size(48.dp)
+                                .size(56.dp)
                                 .clip(RoundedCornerShape(8.dp)) // Bordes redondeados
-                                .background(Color(0xFFE8DEF8)) // Fondo suave detrás del ícono
                                 .padding(8.dp) // Espacio interno
                         )
                         Spacer(modifier = Modifier.width(16.dp)) // Separación entre ícono y texto
@@ -181,7 +180,7 @@ fun HomeContent(navController: NavController, innerPadding: PaddingValues) {
         val imageModifier = Modifier
             .fillMaxWidth(0.80f) // Ajusta el ancho al 75% de la pantalla
             .height(200.dp) // Define una altura fija para todas las imágenes
-            .padding(vertical = 8.dp) // Espaciado uniforme entre imágenes
+            .padding(vertical = 6.dp) // Espaciado uniforme entre imágenes
             .border(
                 width = 1.dp,
                 color = Color.Gray.copy(alpha = 0.8f),
