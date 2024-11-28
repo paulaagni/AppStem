@@ -2,12 +2,14 @@ package com.example.appstem.model
 
 import com.example.appstem.R
 
+// Clase de datos para representar información biográfica
 data class DatosBios(
-        val name: String,
-        val profession: String,
-        val imagenId: Int
-    )
+    val name: String,       // Nombre de la persona
+    val profession: String, // Profesión o área de especialidad
+    val imagenId: Int       // ID del recurso de imagen asociado
+)
 
+// Lista de objetos que contiene información sobre mujeres destacadas en STEM
 val info = listOf(
     DatosBios("Hypatia de Alejandría", "Matemática", R.drawable.hypatia),
     DatosBios("Hedy Lamarr", "Inventora", R.drawable.hedylamarr),

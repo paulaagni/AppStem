@@ -25,7 +25,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appstem.R
 import com.example.appstem.ui.theme.AppStemTheme
@@ -44,7 +43,7 @@ import com.example.appstem.model.ItemsMenu.Favoritas
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Home(navController: NavController) {
+fun Home() {
     AppStemTheme {
         Scaffold(
             topBar = {
@@ -172,7 +171,7 @@ fun HomePreview() {
                 )
             }
         ) { paddingValues ->
-             Home(navController = rememberNavController())
+             Home()
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -183,5 +182,3 @@ fun HomePreview() {
         }
     }
 }
-
-
