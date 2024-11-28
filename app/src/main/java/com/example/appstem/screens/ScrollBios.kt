@@ -1,8 +1,8 @@
 package com.example.appstem.screens
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -47,7 +46,21 @@ fun ScrollBios(navController: NavController) {
         DatosBios("Rachel Louise Carson", "Bióloga", R.drawable.rachelcarson),
         DatosBios("Mary Anning", "Paleontóloga", R.drawable.maryanning),
         DatosBios("Alice Ball", "Química", R.drawable.aliceball),
-        DatosBios("Marie Curie", "Física", R.drawable.mariecurie)
+        DatosBios("Marie Curie", "Física", R.drawable.mariecurie),
+        DatosBios("Ada Lovelace", "Matemática", R.drawable.adalovelace),
+        DatosBios("Lise Meitner", "Física", R.drawable.lisemeitner),
+        DatosBios("Edith Clarke", "Ingeniera", R.drawable.edithclarke),
+        DatosBios("Maryam Mirzakhani", "Matemática", R.drawable.maryammirzakhani),
+        DatosBios("Cecilia Payne-Gaposchkin", "Astrónoma", R.drawable.ceciliapayne),
+        DatosBios("Emmy Noether", "Matemática", R.drawable.emmynoether),
+        DatosBios("Mary Agnes Chase", "Botánica", R.drawable.maryagneschase),
+        DatosBios("Gerty Cori", "Bioquímica", R.drawable.gertycori),
+        DatosBios("Esther Lederberg", "Microbióloga", R.drawable.estherlederberg),
+        DatosBios("Valentina Tereshkova", "Cosmonauta", R.drawable.valentinatereshkova),
+        DatosBios("Annie J. Easley", "Informática", R.drawable.annieeasley),
+        DatosBios("Vera Rubin", "Astrónoma", R.drawable.verarubin),
+        DatosBios("Jane Cooke Wright", "Oncóloga", R.drawable.janecookewright),
+        DatosBios("Jane Goodall", "Primatóloga", R.drawable.janegoodall)
     )
 
     val busquedaBarra = remember { mutableStateOf("") }
@@ -59,30 +72,21 @@ fun ScrollBios(navController: NavController) {
                 TopAppBar(
                     colors = TopAppBarDefaults.topAppBarColors(
                 ),
-                    title = { 
-
+                    title = {
                         Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "ArrowBack",
-                            modifier = Modifier
-                                .size(24.dp)
-                                .padding(end = 8.dp)
-                                .clickable { navController.popBackStack() }
-                        )
                         Text("Biografías")
                         }
                     }
                 )
                      },
+
             content = { paddingValues ->
                 Column(
                     modifier = Modifier
                         .padding(paddingValues)
-                        .padding(16.dp)
-                        .background(Color.White)
+                        .padding(start = 16.dp, end= 16.dp)
                 ) {
                 TextField(
                     value = busquedaBarra.value,
@@ -153,9 +157,17 @@ fun ScrollBios(navController: NavController) {
     }
 }
 
-@Preview (showBackground = true)
+@Preview (showBackground = true, heightDp = 2000)
 @Composable
 fun ScrollBiosPreview(){
+    AppStemTheme {
+        ScrollBios(navController = rememberNavController())
+    }
+}
+
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun ScrollBiosDarkPreview() {
     AppStemTheme {
         ScrollBios(navController = rememberNavController())
     }
