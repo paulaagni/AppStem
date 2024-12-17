@@ -4,6 +4,7 @@ package com.example.appstem.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -49,6 +51,7 @@ fun BiografiaHypatia(navController: NavController) {
                 contentScale = ContentScale.Crop, // Escala la imagen para ajustarse al tamaño.
                 modifier = Modifier
                     .size(150.dp) // Tamaño de la imagen.
+                    .clip(CircleShape)
             )
 
             Spacer(modifier = Modifier.height(16.dp)) // Espaciador entre la imagen y el texto.
