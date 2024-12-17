@@ -10,7 +10,7 @@ data class DataBios (
 )
 
 val infoBios = listOf(
-    DataBios(R.string.hypatia_de_alejandr_a.toString(), "Matemática", "", R.drawable.hypatia),
+    DataBios(R.string.hypatia_de_alejandria.toString(), "Matemática", "", R.drawable.hypatia),
     DataBios("Hedy Lamarr", "Inventora", "", R.drawable.hedylamarr),
     DataBios("Rachel Louise Carson", "Bióloga", "", R.drawable.rachelcarson),
     DataBios("Mary Anning", "Paleontóloga", "", R.drawable.maryanning),

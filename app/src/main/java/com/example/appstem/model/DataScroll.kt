@@ -30,5 +30,12 @@ val info = listOf(
     DataScroll("Annie J. Easley", "Informática", R.drawable.annieeasley),
     DataScroll("Vera Rubin", "Astrónoma", R.drawable.verarubin),
     DataScroll("Jane Cooke Wright", "Oncóloga", R.drawable.janecookewright),
-    DataScroll("Jane Goodall", "Primatóloga", R.drawable.janegoodall)
+    DataScroll("Jane Goodall", "Primatóloga", R.drawable.janegoodall),
+    DataScroll("Alicia Asín","Ingeniera",R.drawable.alicia_asin),
+    DataScroll("Ana Maiques","Física", R.drawable.ana_maiques),
+    DataScroll("Andrea Barber","Ingeniera Biotecnóloga",R.drawable.andrea_barber),
+    DataScroll("Aridna Farres","Ingeniera industrial", R.drawable.ariadna_farres),
+    DataScroll("Ariadna Font Llitjó", "Ingeniera Industrial", R.drawable.ariadna_font),
+    DataScroll("Elena García Armada", "Ingeniera de \ntelecomunicaciones", R.drawable.elena_garcia),
+    DataScroll("Elisenda Bou", "Biotecnóloga", R.drawable.elisenda_bou),
 )
