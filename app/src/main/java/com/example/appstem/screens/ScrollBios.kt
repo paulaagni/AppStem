@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -43,6 +44,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.appstem.R
 import com.example.appstem.model.info
 import com.example.appstem.navigation.AppScreens
 import com.example.appstem.ui.theme.AppStemTheme
@@ -95,7 +97,7 @@ fun ScrollBios(navController: NavController) {
 
                     // Filtrado dinámico de biografías basado en el texto de la barra de búsqueda
                     val filtroBusqueda = info.filter {
-                        it.name.contains(busquedaBarra.value, ignoreCase = true)
+                        LocalContext.current.getString(it.name).contains(busquedaBarra.value, ignoreCase = true)
                     }
 
                     // Lista perezosa para mostrar los elementos filtrados
@@ -108,7 +110,7 @@ fun ScrollBios(navController: NavController) {
                                     .padding(8.dp) // Separación entre tarjetas
                                     .clickable {
                                         // Navegar a la biografía de Hypatia si el nombre coincide
-                                        if (item.name == "Hypatia de Alejandría")
+                                        if (item.name == R.string.hypatia_de_alejandria)
                                             navController.navigate(route = AppScreens.Bio.route)
                                     },
                                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp), // Elevación para dar sombra
@@ -123,17 +125,19 @@ fun ScrollBios(navController: NavController) {
                                 ) {
                                     Column {
                                         // Nombre del personaje (en negrita y con límite de líneas)
+                                        // Nombre del personaje
                                         Text(
-                                            text = item.name,
+                                            text = LocalContext.current.getString(item.name), // Obtener el texto desde el recurso de cadena
                                             fontWeight = FontWeight.Bold,
                                             overflow = TextOverflow.Ellipsis, // Truncar texto si es muy largo
                                             maxLines = 1
                                         )
-                                        // Profesión o rol del personaje
+
                                         Text(
-                                            text = item.profession,
+                                            text = LocalContext.current.getString(item.profession), // Obtener el texto desde el recurso de cadena
                                             modifier = Modifier.padding(top = 4.dp)
                                         )
+
                                     }
 
                                     // Imagen del personaje en formato circular
