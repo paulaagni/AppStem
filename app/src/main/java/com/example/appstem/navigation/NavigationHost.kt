@@ -25,7 +25,7 @@ fun NavigationHost(navController: NavHostController) {
             // Define las rutas de navegación para las pantallas de la aplicación.
             composable(AppScreens.Home.route) {
                 // Pantalla de inicio (Home)
-                Home() // Llama a la función Home pasando el navController
+                Home(navController) // Llama a la función Home pasando el navController
             }
             composable(AppScreens.ScrollBios.route) {
                 // Pantalla de biografías (ScrollBios)
