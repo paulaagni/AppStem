@@ -1,15 +1,18 @@
 package com.example.appstem.model
 
+// Importación de la anotación StringRes que indica que los valores son referencias a cadenas de texto en recursos.
 import androidx.annotation.StringRes
 import com.example.appstem.R
 
+// Clase de datos para almacenar la información de las biografías de las científicas.
 data class DataBios (
-    @StringRes val name: Int,
-    @StringRes val profession: Int,
-    @StringRes val description: Int,
-    val imageId: Int
+    @StringRes val name: Int, // Recurso de cadena que contiene el nombre de la persona.
+    @StringRes val profession: Int, // Recurso de cadena que contiene la profesión de la persona.
+    @StringRes val description: Int, // Recurso de cadena que contiene la descripción o biografía de la persona.
+    val imageId: Int // ID de la imagen asociada a la persona (se usa en recursos de imágenes).
 )
 
+// Lista de biografías con los detalles de varias científicas.
 val infoBios = listOf(
     DataBios(R.string.hypatia_de_alejandria, R.string.matematica, R.string.bio_hypatia, R.drawable.hypatia),
     DataBios(R.string.hedy_lamarr, R.string.inventora, R.string.bio_hedy_lamarr, R.drawable.hedylamarr),

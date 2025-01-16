@@ -39,77 +39,85 @@ import com.example.appstem.ui.theme.AppStemTheme
 // Composable principal que representa la biografía de Hypatia.
 @Composable
 fun BioScreen(navController: NavController, bioIndex: Int) {
-    val bio = infoBios[bioIndex]
+    val bio = infoBios[bioIndex] // Obtiene la biografía correspondiente según el índice proporcionado.
 
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+            .fillMaxSize() // El Box ocupa todo el tamaño disponible de la pantalla
+            .padding(16.dp) // Aplica un relleno de 16dp alrededor del Box
     ) {
+        // Column para organizar los elementos en disposición vertical
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(start = 16.dp, end = 16.dp, bottom = 90.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxSize() // La columna ocupa todo el tamaño disponible
+                .verticalScroll(rememberScrollState()) // Permite el desplazamiento vertical si el contenido excede la pantalla
+                .padding(start = 16.dp, end = 16.dp, bottom = 90.dp), // Relleno dentro de la columna
+            horizontalAlignment = Alignment.CenterHorizontally // Centra los elementos horizontalmente
         ) {
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(32.dp)) // Espacio de 32dp entre la parte superior y la imagen
 
+            // Imagen de la persona (Hypatia), recortada en forma circular
             Image(
-                painter = painterResource(id = bio.imageId),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
+                painter = painterResource(id = bio.imageId), // Obtiene la imagen desde los recursos
+                contentDescription = null, // No es necesario un contenido descriptivo aquí
+                contentScale = ContentScale.Crop, // Recorta la imagen para ajustarla
                 modifier = Modifier
-                    .size(150.dp)
-                    .clip(CircleShape)
+                    .size(150.dp) // La imagen tendrá un tamaño de 150dp
+                    .clip(CircleShape) // Aplica una forma circular a la imagen
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp)) // Espacio de 16dp debajo de la imagen
 
+            // Columna para organizar el texto de la biografía
             Column(horizontalAlignment = Alignment.Start) {
+                // Nombre de la persona en negrita y tamaño de fuente 20sp
                 Text(
                     text = stringResource(bio.name),
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
+                // Profesión de la persona con tamaño de fuente 16sp
                 Text(
                     text = stringResource(bio.profession),
                     fontSize = 16.sp
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp)) // Espacio de 16dp entre el nombre y la descripción
+
+                // Descripción de la biografía, con texto justificado y tamaño de fuente 14sp
                 Text(
                     text = stringResource(bio.description),
                     fontSize = 14.sp,
                     textAlign = TextAlign.Justify
                 )
 
-                Spacer(modifier = Modifier.height(40.dp))
+                Spacer(modifier = Modifier.height(40.dp)) // Espacio de 40dp antes de los botones
 
-                // Usamos un Row para poner los botones en paralelo
+                // Usamos un Row para poner los botones en paralelo (uno al lado del otro)
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp), // Espaciado entre los botones
-                    verticalAlignment = Alignment.CenterVertically
+                        .fillMaxWidth(), // El Row ocupa todo el ancho disponible
+                    horizontalArrangement = Arrangement.spacedBy(8.dp), // Espaciado de 8dp entre los botones
+                    verticalAlignment = Alignment.CenterVertically // Alinea los botones verticalmente en el centro
                 ) {
-
+                    // Primer botón (Favoritas)
                     Button(
                         onClick = { },
-                        shape = RoundedCornerShape(20.dp),
-                        modifier = Modifier.weight(1f) // Hace que los botones se distribuyan igual
+                        shape = RoundedCornerShape(20.dp), // Forma redondeada con 20dp de radio
+                        modifier = Modifier.weight(1f) // Hace que el botón ocupe la mitad del espacio disponible
                     ) {
                         Text(
-                            text = stringResource(R.string.boton_favoritas)
+                            text = stringResource(R.string.boton_favoritas) // Texto del botón, obtenido de los recursos
                         )
                     }
 
+                    // Segundo botón (Volver)
                     Button(
-                        onClick = { navController.popBackStack() },
-                        shape = RoundedCornerShape(20.dp),
-                        modifier = Modifier.weight(1f) // Hace que los botones se distribuyan igual
+                        onClick = { navController.popBackStack() }, // Acción para regresar a la pantalla anterior
+                        shape = RoundedCornerShape(20.dp), // Forma redondeada con 20dp de radio
+                        modifier = Modifier.weight(1f) // Hace que el botón ocupe la mitad del espacio disponible
                     ) {
                         Text(
-                            text = stringResource(R.string.boton_volver)
+                            text = stringResource(R.string.boton_volver) // Texto del botón, obtenido de los recursos
                         )
                     }
                 }
@@ -124,6 +132,6 @@ fun BioScreen(navController: NavController, bioIndex: Int) {
 fun PreviewBioScreen() {
     AppStemTheme {
         val navController = rememberNavController() // Crea un controlador de navegación para la vista previa.
-        BioScreen(navController,1) // Llama a la función principal con el controlador.
+        BioScreen(navController, 1) // Llama a la función principal con el controlador.
     }
 }
