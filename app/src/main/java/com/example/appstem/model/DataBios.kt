@@ -29,5 +29,12 @@ val infoBios = listOf(
     DataBios(R.string.annie_easley, R.string.informatica, R.string.bio_annie_easley, R.drawable.annieeasley),
     DataBios(R.string.vera_rubin, R.string.astronoma, R.string.bio_vera_rubin, R.drawable.verarubin),
     DataBios(R.string.jane_cooke_wright, R.string.oncologa, R.string.bio_jane_cooke_wright, R.drawable.janecookewright),
-    DataBios(R.string.jane_goodall, R.string.primatologa, R.string.bio_jane_goodall, R.drawable.janegoodall)
+    DataBios(R.string.jane_goodall, R.string.primatologa, R.string.bio_jane_goodall, R.drawable.janegoodall),
+    DataBios(R.string.alicia_asin, R.string.ingeniera,R.string.bio_alicia_asin, R.drawable.alicia_asin),
+    DataBios(R.string.ana_maiques, R.string.fisica, R.string.bio_ana_maiques, R.drawable.ana_maiques),
+    DataBios(R.string.andrea_barber, R.string.ingeniera_biotecnologa, R.string.bio_andrea_barber, R.drawable.andrea_barber),
+    DataBios(R.string.ariadna_farres, R.string.ingeniera_industrial, R.string.bio_ariadna_farres, R.drawable.ariadna_farres),
+    DataBios(R.string.ariadna_font_llitjo, R.string.ingeniera_industrial, R.string.bio_ariadna_font,R.drawable.ariadna_font),
+    DataBios(R.string.elena_garcia_armada, R.string.ingeniera_de_telecomunicaciones, R.string.bio_elena_garcia, R.drawable.elena_garcia),
+    DataBios(R.string.elisenda_bou, R.string.biotecnologa, R.string.bio_elisenda_bou,R.drawable.elisenda_bou),
 )

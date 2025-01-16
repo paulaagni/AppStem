@@ -24,122 +24,66 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appstem.R
+import com.example.appstem.model.infoBios
 import com.example.appstem.ui.theme.AppStemTheme
 
 // Composable principal que representa la biografía de Hypatia.
 @Composable
-fun BiografiaHypatia(navController: NavController) {
-    // Contenedor principal que ocupa todo el tamaño disponible.
+fun BioScreen(navController: NavController, bioIndex: Int) {
+    val bio = infoBios[bioIndex]
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp) // Margen exterior de la pantalla.
+            .padding(16.dp)
     ) {
-        // Columna principal que contiene el contenido de la biografía.
         Column(
             modifier = Modifier
-                .fillMaxSize() // Ocupa todo el tamaño disponible.
-                .verticalScroll(rememberScrollState()), // Habilita el scroll vertical.
-            horizontalAlignment = Alignment.CenterHorizontally // Centra el contenido horizontalmente.
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(32.dp)) // Espaciador para separar elementos.
+            Spacer(modifier = Modifier.height(32.dp))
 
-            // Imagen de Hypatia con un tamaño fijo.
             Image(
-                painter = painterResource(id = R.drawable.hypatia),
-                contentDescription = stringResource(R.string.descripcion_imagen), // Descripción para accesibilidad.
-                contentScale = ContentScale.Crop, // Escala la imagen para ajustarse al tamaño.
+                painter = painterResource(id = bio.imageId),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .size(150.dp) // Tamaño de la imagen.
+                    .size(150.dp)
                     .clip(CircleShape)
             )
 
-            Spacer(modifier = Modifier.height(16.dp)) // Espaciador entre la imagen y el texto.
+            Spacer(modifier = Modifier.height(16.dp))
 
-            // Columna que contiene la información textual de Hypatia.
             Column(horizontalAlignment = Alignment.Start) {
-                // Nombre de Hypatia en negrita y con un tamaño mayor.
                 Text(
-                    text = stringResource(R.string.nombre_hypatia),
+                    text = stringResource(bio.name),
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp
                 )
-                // Ocupación de Hypatia.
                 Text(
-                    text = stringResource(R.string.ocupacion_hypatia),
+                    text = stringResource(bio.profession),
                     fontSize = 16.sp
                 )
-
-                // Subcolumna centrada que contiene un título, subtítulo y descripción.
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    // Título principal en negrita y centrado.
-                    Text(
-                        text = stringResource(R.string.titulo_principal),
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
-                        textAlign = TextAlign.Center
-                    )
-
-                    // Subtítulo centrado.
-                    Text(
-                        text = stringResource(R.string.subtitulo),
-                        fontSize = 14.sp,
-                        textAlign = TextAlign.Center
-                    )
-
-                    Spacer(modifier = Modifier.height(8.dp)) // Espaciador entre subtítulo y descripción.
-
-                    // Descripción de Hypatia, justificada y con margen horizontal.
-                    Text(
-                        text = stringResource(R.string.descripcion_hypatia),
-                        fontSize = 14.sp,
-                        textAlign = TextAlign.Justify,
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp)) // Espaciador antes de los botones.
-
-            // Fila que contiene los botones al final de la pantalla.
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth() // Ocupa todo el ancho disponible.
-                    .padding(top = 16.dp), // Margen superior para separar los botones.
-                horizontalArrangement = Arrangement.End // Alinea los botones al final de la fila.
-            ) {
-                // Botón "Favoritas" con esquinas redondeadas.
-                Button(
-                    onClick = { /* Acción para Favoritas */ },
-                    shape = RoundedCornerShape(20.dp) // Esquinas redondeadas.
-                ) {
-                    Text(
-                        text = stringResource(R.string.boton_favoritas) // Texto del botón.
-                    )
-                }
-
-                Spacer(modifier = Modifier.width(8.dp)) // Espaciador entre los botones.
-
-                // Botón "Volver" que regresa a la pantalla anterior.
-                Button(
-                    onClick = { navController.popBackStack() }, // Acción para regresar.
-                    shape = RoundedCornerShape(20.dp) // Esquinas redondeadas.
-                ) {
-                    Text(
-                        text = stringResource(R.string.boton_volver), // Texto del botón.
-                    )
-                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = stringResource(bio.description),
+                    fontSize = 14.sp,
+                    textAlign = TextAlign.Justify
+                )
             }
         }
     }
 }
 
+
 // Vista previa de la pantalla en Android Studio.
 @Preview(showBackground = true)
 @Composable
-fun PreviewBiografiaHypatia() {
+fun PreviewBioScreen() {
     AppStemTheme {
         val navController = rememberNavController() // Crea un controlador de navegación para la vista previa.
-        BiografiaHypatia(navController) // Llama a la función principal con el controlador.
+        BioScreen(navController,1) // Llama a la función principal con el controlador.
     }
 }

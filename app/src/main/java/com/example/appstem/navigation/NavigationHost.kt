@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.appstem.screens.BiografiaHypatia
+import androidx.navigation.navArgument
+import com.example.appstem.screens.BioScreen
 import com.example.appstem.screens.Home
 import com.example.appstem.screens.ScrollBios
 import com.example.appstem.ui.theme.AppStemTheme
@@ -31,9 +33,12 @@ fun NavigationHost(navController: NavHostController) {
                 // Pantalla de biografías (ScrollBios)
                 ScrollBios(navController) // Llama a la función ScrollBios pasando el navController
             }
-            composable(AppScreens.Bio.route) {
-                // Pantalla de biografía de Hypatia (Bio)
-                BiografiaHypatia(navController) // Llama a la función BiografiaHypatia pasando el navController
+            composable(
+                route = "bio_screen/{bioIndex}",
+                arguments = listOf(navArgument("bioIndex") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val bioIndex = backStackEntry.arguments?.getInt("bioIndex") ?: 0
+                BioScreen(navController, bioIndex)
             }
         }
     }
