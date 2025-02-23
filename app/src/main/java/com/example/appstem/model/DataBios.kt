@@ -1,11 +1,12 @@
 package com.example.appstem.model
 
+import androidx.annotation.StringRes
 import com.example.appstem.R
 
 data class DataBios (
-    val name: Int,
-    val profession: Int,
-    val description: Int,
+    @StringRes val name: Int,
+    @StringRes val profession: Int,
+    @StringRes val description: Int,
     val imageId: Int
 )
 

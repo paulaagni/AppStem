@@ -2,7 +2,16 @@ package com.example.appstem.screens
 
 // Importaciones necesarias para la creación de la pantalla y los componentes UI.
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -40,7 +49,8 @@ fun BioScreen(navController: NavController, bioIndex: Int) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
+                .padding(start = 16.dp, end = 16.dp, bottom = 90.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(32.dp))
@@ -72,11 +82,41 @@ fun BioScreen(navController: NavController, bioIndex: Int) {
                     fontSize = 14.sp,
                     textAlign = TextAlign.Justify
                 )
+
+                Spacer(modifier = Modifier.height(40.dp))
+
+                // Usamos un Row para poner los botones en paralelo
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp), // Espaciado entre los botones
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    Button(
+                        onClick = { },
+                        shape = RoundedCornerShape(20.dp),
+                        modifier = Modifier.weight(1f) // Hace que los botones se distribuyan igual
+                    ) {
+                        Text(
+                            text = stringResource(R.string.boton_favoritas)
+                        )
+                    }
+
+                    Button(
+                        onClick = { navController.popBackStack() },
+                        shape = RoundedCornerShape(20.dp),
+                        modifier = Modifier.weight(1f) // Hace que los botones se distribuyan igual
+                    ) {
+                        Text(
+                            text = stringResource(R.string.boton_volver)
+                        )
+                    }
+                }
             }
         }
     }
 }
-
 
 // Vista previa de la pantalla en Android Studio.
 @Preview(showBackground = true)
