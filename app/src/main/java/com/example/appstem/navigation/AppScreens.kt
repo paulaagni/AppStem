@@ -11,4 +11,6 @@ sealed class AppScreens(val route: String) {
 
     // Pantalla de biografía individual (bio_screen)
     data object Bio : AppScreens("bio_screen")
+
+    data object Splash : AppScreens("splash_screen")
 }

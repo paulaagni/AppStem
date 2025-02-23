@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
 import com.example.appstem.screens.BioScreen
 import com.example.appstem.screens.Home
 import com.example.appstem.screens.ScrollBios
+import com.example.appstem.screens.SplashScreen
 import com.example.appstem.ui.theme.AppStemTheme
 
 // Función Composable que configura el host de navegación para la aplicación.
@@ -21,9 +22,14 @@ fun NavigationHost(navController: NavHostController) {
         // Define el NavHost, que maneja la navegación entre diferentes pantallas.
         NavHost(
             navController = navController, // Controlador de navegación
-            startDestination = AppScreens.Home.route, // Pantalla inicial
+            startDestination = AppScreens.Splash.route, // Pantalla inicial
             modifier = Modifier.fillMaxSize() // Modificador para que ocupe todo el tamaño disponible
         ) {
+            composable(AppScreens.Splash.route){
+                SplashScreen(onSplashFinished = {
+                    navController.navigate(AppScreens.Home.route)
+                })
+            }
             // Define las rutas de navegación para las pantallas de la aplicación.
             composable(AppScreens.Home.route) {
                 // Pantalla de inicio (Home)

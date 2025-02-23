@@ -29,30 +29,33 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.appstem.model.infoBios
+import com.example.appstem.R
 import com.example.appstem.ui.theme.AppStemTheme
 
 
-// Pantalla principal que muestra una lista de biografías con una barra de búsqueda
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScrollBios(navController: NavController) {
-    val busquedaBarra = remember { mutableStateOf("") }
+fun ScrollBios(
+    navController: NavController,
+    viewModel: ScrollBiosViewModel = viewModel(factory = ScrollBiosViewModel.factory)
+) {
+    val searchQuery by viewModel.searchQuery.collectAsState()
+    val biosList by viewModel.filteredBios.collectAsState()
 
     AppStemTheme {
         Scaffold(
@@ -66,11 +69,11 @@ fun ScrollBios(navController: NavController) {
                 Column(
                     modifier = Modifier
                         .padding(paddingValues)
-                        .padding(start = 16.dp, end = 16.dp, bottom = 90.dp)
+                        .padding(horizontal = 16.dp, vertical = 16.dp)
                 ) {
                     TextField(
-                        value = busquedaBarra.value,
-                        onValueChange = { busquedaBarra.value = it },
+                        value = searchQuery,
+                        onValueChange = { viewModel.onSearchQueryChanged(it) },
                         label = { Text("Buscar") },
                         leadingIcon = {
                             Icon(imageVector = Icons.Filled.Search, contentDescription = "Buscar")
@@ -79,21 +82,15 @@ fun ScrollBios(navController: NavController) {
                         shape = RoundedCornerShape(16.dp)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-
-                    val filtroBusqueda = infoBios.filter {
-                        LocalContext.current.getString(it.name).contains(busquedaBarra.value, ignoreCase = true)
-                    }
-
                     LazyColumn {
-                        items(filtroBusqueda) { item ->
+                        items(biosList) { bio ->
                             Card(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(8.dp)
                                     .clickable {
-                                        // Navegar a la pantalla de detalles pasando el índice del ítem seleccionado
-                                        val itemIndex = infoBios.indexOf(item)
-                                        navController.navigate("bio_screen/$itemIndex")
+                                        val index = biosList.indexOf(bio)
+                                        navController.navigate("bio_screen/$index")
                                     },
                                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                                 border = BorderStroke(1.dp, Color(0xFFCAC4D0))
@@ -107,19 +104,19 @@ fun ScrollBios(navController: NavController) {
                                 ) {
                                     Column {
                                         Text(
-                                            text = LocalContext.current.getString(item.name),
+                                            text = bio.nombre,
                                             fontWeight = FontWeight.Bold,
                                             overflow = TextOverflow.Ellipsis,
                                             maxLines = 1
                                         )
                                         Text(
-                                            text = LocalContext.current.getString(item.profession),
+                                            text = bio.profesion,
                                             modifier = Modifier.padding(top = 4.dp)
                                         )
                                     }
-
+                                    // Usamos una imagen por defecto, ya que la entidad no tiene imagen.
                                     Image(
-                                        painter = painterResource(id = item.imageId),
+                                        painter = painterResource(id = R.drawable.placeholder_image),
                                         contentDescription = null,
                                         contentScale = ContentScale.Crop,
                                         modifier = Modifier
@@ -136,6 +133,7 @@ fun ScrollBios(navController: NavController) {
         )
     }
 }
+
 
 
 // Vista previa de la pantalla en modo claro
