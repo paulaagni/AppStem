@@ -36,7 +36,7 @@ fun SplashScreen(onSplashFinished: () -> Unit) {
             Text(text = "Cargando...", style = MaterialTheme.typography.headlineSmall)
             Spacer(modifier = Modifier.height(16.dp))
             LinearProgressIndicator(
-                progress = { progress },
+                progress = progress ,
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
                     .height(8.dp),

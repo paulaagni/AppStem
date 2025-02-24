@@ -2,8 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 
-    id ("kotlin-kapt")
-
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
 }
 
 android {
@@ -53,32 +52,47 @@ android {
 }
 
 dependencies {
-
+    // Core + Lifecycle
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Compose BOM
     implementation(platform(libs.androidx.compose.bom))
+
+    // Módulos Compose
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    // LiveData para Compose
+    implementation(libs.androidx.compose.runtime.livedata)
+
+    // Activity para Compose
+    implementation(libs.androidx.activity.compose)
+
+    // Navigation Compose
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.benchmark.macro)
+
+    // Room
     implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.runtime.compose)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose.android)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.livedata)
-    kapt("androidx.room:room-compiler:2.6.1")
+    implementation(libs.androidx.room.ktx)
+    ksp("androidx.room:room-compiler:2.6.1")
+
+    // Glide, Coil, Benchmark, etc., si los usas
+    implementation(libs.glide)
+    implementation(libs.coil.compose)
+    implementation(libs.androidx.benchmark.macro)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
