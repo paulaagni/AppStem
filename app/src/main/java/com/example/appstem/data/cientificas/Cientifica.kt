@@ -11,14 +11,18 @@ data class Cientifica(
     val id: Int,
 
     @ColumnInfo(name = "name")
-    val nombre: String,           // en la BD se llama "name"
+    val nombre: String,
 
     @ColumnInfo(name = "profession")
-    val profesion: String,        // en la BD se llama "profession"
+    val profesion: String,
 
     @ColumnInfo(name = "description")
-    val descripcion: String,      // en la BD se llama "description"
+    val descripcion: String,
 
     @ColumnInfo(name = "citas")
-    val cita: String              // en la BD se llama "citas"
+    val cita: String,
+
+    // NUEVO campo para la referencia de la imagen
+    @ColumnInfo(name = "imageResName")
+    val imageResName: String
 )

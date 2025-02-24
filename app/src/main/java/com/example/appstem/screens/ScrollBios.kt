@@ -1,12 +1,12 @@
 package com.example.appstem.screens
 
-// Importaciones necesarias para la creación de la pantalla y los componentes UI.
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -46,7 +47,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.appstem.R
 import com.example.appstem.ui.theme.AppStemTheme
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -82,7 +82,11 @@ fun ScrollBios(
                         shape = RoundedCornerShape(16.dp)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    LazyColumn {
+
+                    // Aumentamos el espacio inferior (bottom) en el contentPadding
+                    LazyColumn(
+                        contentPadding = PaddingValues(bottom = 64.dp)
+                    ) {
                         items(biosList) { bio ->
                             Card(
                                 modifier = Modifier
@@ -102,7 +106,10 @@ fun ScrollBios(
                                     horizontalArrangement = Arrangement.SpaceBetween,
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Column {
+                                    // Texto a la izquierda
+                                    Column(
+                                        modifier = Modifier.weight(1f) // opcional para que el texto "empuje" menos la imagen
+                                    ) {
                                         Text(
                                             text = bio.nombre,
                                             fontWeight = FontWeight.Bold,
@@ -111,16 +118,28 @@ fun ScrollBios(
                                         )
                                         Text(
                                             text = bio.profesion,
-                                            modifier = Modifier.padding(top = 4.dp)
+                                            modifier = Modifier.padding(top = 4.dp),
+                                            overflow = TextOverflow.Ellipsis,
+                                            maxLines = 2
                                         )
                                     }
-                                    // Usamos una imagen por defecto, ya que la entidad no tiene imagen.
+
+                                    // Imagen a la derecha
+                                    val context = LocalContext.current
+                                    val resourceId = context.resources.getIdentifier(
+                                        bio.imageResName,
+                                        "drawable",
+                                        context.packageName
+                                    )
+
                                     Image(
-                                        painter = painterResource(id = R.drawable.placeholder_image),
+                                        painter = painterResource(
+                                            id = if (resourceId != 0) resourceId else R.drawable.placeholder_image
+                                        ),
                                         contentDescription = null,
                                         contentScale = ContentScale.Crop,
                                         modifier = Modifier
-                                            .size(88.dp)
+                                            .size(88.dp)    // Fija el tamaño de la imagen
                                             .padding(start = 8.dp)
                                             .clip(CircleShape)
                                     )
@@ -135,8 +154,6 @@ fun ScrollBios(
 }
 
 
-
-// Vista previa de la pantalla en modo claro
 @Preview(showBackground = true, heightDp = 2000)
 @Composable
 fun ScrollBiosPreview() {
@@ -145,7 +162,6 @@ fun ScrollBiosPreview() {
     }
 }
 
-// Vista previa de la pantalla en modo oscuro
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun ScrollBiosDarkPreview() {

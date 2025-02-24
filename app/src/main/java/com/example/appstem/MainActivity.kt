@@ -44,8 +44,8 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     bottomBar = {
-                        // Mostrar la barra de navegación solo si la ruta actual no es "Bio"
-                        if (currentRoute != AppScreens.Bio.route) {
+                        // Mostrar la barra de navegación solo si la ruta actual no es "Bio o Splash"
+                        if (currentRoute != AppScreens.Splash.route && currentRoute != AppScreens.Bio.route) {
                             BottomNavigation(navController, navigationItem)
                         }
                     }

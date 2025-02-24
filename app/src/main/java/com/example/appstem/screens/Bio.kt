@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,9 +58,16 @@ fun BioScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(32.dp))
-            // Se muestra una imagen por defecto, ya que la entidad no dispone de imagen.
+            val context = LocalContext.current
+            val resourceId = context.resources.getIdentifier(
+                bio.imageResName,
+                "drawable",
+                context.packageName
+            )
             Image(
-                painter = painterResource(id = R.drawable.placeholder_image),
+                painter = painterResource(
+                    id = if (resourceId != 0) resourceId else R.drawable.placeholder_image
+                ),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
