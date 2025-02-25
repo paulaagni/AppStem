@@ -21,9 +21,8 @@ sealed class ItemsMenu(
     // Elemento de menú para la pantalla de biografías
     data object ScrollBios : ItemsMenu(Icons.Filled.AccountBox, "Biografías", AppScreens.ScrollBios.route)
 
-    // Elemento de menú para la pantalla de citas
-    // Este ítem no tiene ruta asociada, ya que no lleva a una nueva pantalla
-    data object Citas : ItemsMenu(Icons.Filled.Create, "Citas", null)
+
+    data object ScrollCitas : ItemsMenu(Icons.Filled.Create, "Citas", AppScreens.ScrollCitas.route)
 
     // Elemento de menú para la pantalla de favoritas
     // Este ítem tampoco tiene ruta asociada

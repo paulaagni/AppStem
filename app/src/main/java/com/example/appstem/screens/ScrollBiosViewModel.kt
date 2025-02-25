@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.launch
 
 /**
  * ViewModel que gestiona los datos de las biografías y la lógica de filtrado según la búsqueda.
@@ -45,6 +46,69 @@ class ScrollBiosViewModel(private val cientificasDao: CientificasDao) : ViewMode
     fun onSearchQueryChanged(newQuery: String) {
         _searchQuery.value = newQuery
     }
+
+    fun addCita(id: Int, nuevaCita: String) {
+        viewModelScope.launch {
+            allBiosFlow.collect { bios ->
+                val updatedBio = bios.find { it.id == id }
+                updatedBio?.let {
+                    // Comprobar si la nueva cita ya está en las citas existentes
+                    val citasExistentes = it.cita.split("\n")?.toSet() ?: setOf()
+
+                    // Si la nueva cita no está en las citas existentes, la añadimos
+                    if (!citasExistentes.contains(nuevaCita.trim())) {
+                        val updatedCitas = if (it.cita.isEmpty()) nuevaCita else it.cita + "\n" + nuevaCita
+                        val updatedBioWithCita = it.copy(cita = updatedCitas)
+                        cientificasDao.updateCita(updatedBioWithCita)
+                    }
+                }
+            }
+        }
+    }
+
+
+    fun deleteCita(id: Int, citaAEliminar: String) {
+        viewModelScope.launch {
+            allBiosFlow.collect { bios ->
+                val updatedBio = bios.find { it.id == id }
+                updatedBio?.let {
+                    // Filtramos las citas para eliminar la que coincide
+                    val citasList = it.cita.split("\n").filter { cita -> cita != citaAEliminar }
+                    val updatedCitas = citasList.joinToString("\n") // Unir las citas restantes
+                    val updatedBioWithCita = it.copy(cita = updatedCitas)
+                    // Actualizamos la biografía con las citas modificadas
+                    cientificasDao.updateCita(updatedBioWithCita)
+                }
+            }
+        }
+    }
+
+
+    fun updateCita(id: Int, citaOriginal: String, nuevaCita: String) {
+        viewModelScope.launch {
+            allBiosFlow.collect { bios ->
+                val updatedBio = bios.find { it.id == id }
+                updatedBio?.let {
+                    // Dividir las citas y buscar la cita a actualizar
+                    val citasList = it.cita.split("\n").map { cita ->
+                        if (cita == citaOriginal) nuevaCita else cita // Reemplazar la cita original por la nueva
+                    }
+
+                    val updatedCitas = citasList.joinToString("\n") // Unir las citas actualizadas
+                    val updatedBioWithCita = it.copy(cita = updatedCitas)
+                    cientificasDao.updateCita(updatedBioWithCita) // Actualizar en la base de datos
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
 
     companion object {
         // Definición del Factory para crear instancias del ViewModel utilizando viewModelFactory.

@@ -13,4 +13,8 @@ sealed class AppScreens(val route: String) {
     data object Bio : AppScreens("bio_screen")
 
     data object Splash : AppScreens("splash_screen")
+
+    data object ScrollCitas: AppScreens("scrollcitas_screen")
+
+    data object Cita: AppScreens("cita_screen")
 }

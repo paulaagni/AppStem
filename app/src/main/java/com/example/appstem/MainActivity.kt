@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
                 val navigationItem = listOf(
                     Home, // Elemento de navegación para la pantalla Home
                     ScrollBios, // Elemento de navegación para la lista de biografías
-                    Citas, // Elemento de navegación para citas
+                    ScrollCitas, // Elemento de navegación para citas
                     Favoritas // Elemento de navegación para favoritas
                 )
 
@@ -103,7 +103,7 @@ fun DefaultPreview() {
         val fakeMenuItems = listOf(
             Home, // Ítem ficticio Home
             ScrollBios, // Ítem ficticio de biografías
-            Citas, // Ítem ficticio de citas
+            ScrollCitas, // Ítem ficticio de citas
             Favoritas // Ítem ficticio de favoritas
         )
 

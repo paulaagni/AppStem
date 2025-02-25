@@ -36,7 +36,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import com.example.appstem.BottomNavigation
 import com.example.appstem.model.ItemsMenu
-import com.example.appstem.model.ItemsMenu.Citas
 import com.example.appstem.model.ItemsMenu.Favoritas
 
 
@@ -161,7 +160,7 @@ fun HomePreview() {
         val fakeMenuItems = listOf(
             ItemsMenu.Home,
             ItemsMenu.ScrollBios,
-            Citas,
+            ItemsMenu.ScrollCitas,
             Favoritas )
         Scaffold(
             bottomBar = {

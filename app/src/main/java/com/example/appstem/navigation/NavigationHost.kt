@@ -9,8 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.appstem.screens.BioScreen
+import com.example.appstem.screens.CitaScreen
 import com.example.appstem.screens.Home
 import com.example.appstem.screens.ScrollBios
+import com.example.appstem.screens.ScrollCitas
 import com.example.appstem.screens.SplashScreen
 import com.example.appstem.ui.theme.AppStemTheme
 
@@ -46,6 +48,19 @@ fun NavigationHost(navController: NavHostController) {
                 val bioIndex = backStackEntry.arguments?.getInt("bioIndex") ?: 0
                 BioScreen(navController, bioIndex)
             }
+
+            composable(AppScreens.ScrollCitas.route) {
+                ScrollCitas(navController)
+            }
+
+            composable(
+                route = "cita_screen/{bioIndex}",
+                arguments = listOf(navArgument("bioIndex") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val bioIndex = backStackEntry.arguments?.getInt("bioIndex") ?: 0
+                CitaScreen(navController, bioIndex)
+            }
+
         }
     }
 }
