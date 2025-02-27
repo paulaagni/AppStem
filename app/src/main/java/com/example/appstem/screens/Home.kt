@@ -36,7 +36,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import com.example.appstem.BottomNavigation
 import com.example.appstem.model.ItemsMenu
-import com.example.appstem.model.ItemsMenu.Favoritas
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -161,7 +160,7 @@ fun HomePreview() {
             ItemsMenu.Home,
             ItemsMenu.ScrollBios,
             ItemsMenu.ScrollCitas,
-            Favoritas )
+            ItemsMenu.Info )
         Scaffold(
             bottomBar = {
                 BottomNavigation(

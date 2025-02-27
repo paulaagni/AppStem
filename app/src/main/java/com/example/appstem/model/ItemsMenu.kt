@@ -3,8 +3,8 @@ package com.example.appstem.model
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Create
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.appstem.navigation.AppScreens
 
@@ -26,5 +26,5 @@ sealed class ItemsMenu(
 
     // Elemento de menú para la pantalla de favoritas
     // Este ítem tampoco tiene ruta asociada
-    data object Favoritas : ItemsMenu(Icons.Filled.FavoriteBorder, "Favoritas", null)
+    data object Info : ItemsMenu(Icons.Filled.Person, "Nosotros", AppScreens.Info.route)
 }

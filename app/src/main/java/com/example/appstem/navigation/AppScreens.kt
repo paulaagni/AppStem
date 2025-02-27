@@ -16,5 +16,7 @@ sealed class AppScreens(val route: String) {
 
     data object ScrollCitas: AppScreens("scrollcitas_screen")
 
-    data object Cita: AppScreens("cita_screen")
+    data object Info : AppScreens("info_screen")
+
+
 }

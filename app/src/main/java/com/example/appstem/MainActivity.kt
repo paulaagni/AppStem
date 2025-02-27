@@ -23,34 +23,32 @@ import com.example.appstem.navigation.AppScreens
 import com.example.appstem.navigation.NavigationHost
 
 
+
+
 // Actividad principal de la aplicación
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            // Aplicar el tema personalizado de la app
             AppStemTheme {
-                val navController = rememberNavController() // Controlador para la navegación
+                val navController = rememberNavController()
                 val navigationItem = listOf(
-                    Home, // Elemento de navegación para la pantalla Home
-                    ScrollBios, // Elemento de navegación para la lista de biografías
-                    ScrollCitas, // Elemento de navegación para citas
-                    Favoritas // Elemento de navegación para favoritas
+                    Home,
+                    ScrollBios,
+                    ScrollCitas,
+                    Info
                 )
 
-                // Obtener la ruta actual de navegación
                 val currentRoute = currentRoute(navController)
 
                 Scaffold(
                     bottomBar = {
-                        // Mostrar la barra de navegación solo si la ruta actual no es "Bio o Splash"
                         if (currentRoute != AppScreens.Splash.route && currentRoute != AppScreens.Bio.route) {
                             BottomNavigation(navController, navigationItem)
                         }
                     }
                 ) {
-                    // Host de navegación para controlar las pantallas de la app
                     NavigationHost(navController)
                 }
             }
@@ -58,35 +56,31 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-// Función para obtener la ruta actual desde el NavController
 @Composable
 fun currentRoute(navController: NavHostController): String? {
-    val entrada by navController.currentBackStackEntryAsState() // Observar el estado actual
-    return entrada?.destination?.route // Devolver la ruta actual
+    val entrada by navController.currentBackStackEntryAsState()
+    return entrada?.destination?.route
 }
 
-// Barra de navegación en la parte inferior de la pantalla
 @Composable
 fun BottomNavigation(navController: NavHostController, menuItems: List<ItemsMenu>) {
     AppStemTheme {
         BottomAppBar {
             NavigationBar {
-                val currentRoute = currentRoute(navController) // Obtener la ruta actual
+                val currentRoute = currentRoute(navController)
                 menuItems.forEach { item ->
-                    // Crear un elemento de la barra de navegación por cada ítem del menú
                     NavigationBarItem(
-                        icon = { Icon(item.icon, contentDescription = item.title) }, // Ícono del ítem
-                        label = { Text(text = item.title) }, // Etiqueta del ítem
-                        selected = currentRoute == item.route, // Seleccionado si coincide con la ruta actual
+                        icon = { Icon(item.icon, contentDescription = item.title) },
+                        label = { Text(text = item.title) },
+                        selected = currentRoute == item.route,
                         onClick = {
                             item.route?.let { route ->
-                                // Navegar a la nueva ruta solo si no es la actual
                                 if (currentRoute != route) {
                                     navController.navigate(route)
                                 }
                             }
                         },
-                        alwaysShowLabel = false // Ocultar etiqueta si no está seleccionada
+                        alwaysShowLabel = false
                     )
                 }
             }
@@ -104,7 +98,7 @@ fun DefaultPreview() {
             Home, // Ítem ficticio Home
             ScrollBios, // Ítem ficticio de biografías
             ScrollCitas, // Ítem ficticio de citas
-            Favoritas // Ítem ficticio de favoritas
+            Info // Ítem ficticio de favoritas
         )
 
         // Mostrar la barra de navegación con datos ficticios
