@@ -50,25 +50,33 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appstem.R
 import com.example.appstem.ui.theme.AppStemTheme
 
-
 @Composable
 fun CitaScreen(
     navController: NavController,
     bioIndex: Int,
     viewModel: ScrollBiosViewModel = viewModel(factory = ScrollBiosViewModel.factory)
 ) {
+    // Obtenemos la lista filtrada desde el ViewModel
     val biosList by viewModel.filteredBios.collectAsState()
     val bio = biosList.getOrNull(bioIndex) ?: return
 
-    var nuevaCita by remember { mutableStateOf("") }
-    var citasList by remember { mutableStateOf(bio.cita.split("\n")) }
+    // -- CAMBIO 1: Limpiamos y filtramos las citas al inicializar la variable --
+    var citasList by remember {
+        mutableStateOf(
+            bio.cita
+                .split("\n")
+                .map { it.trim() }
+                .filter { it.isNotEmpty() }
+        )
+    }
 
+    // Estados para añadir / editar
+    var nuevaCita by remember { mutableStateOf("") }
     var showDialog by remember { mutableStateOf(false) }
 
-    // Estados para edición
     var showEditDialog by remember { mutableStateOf(false) }
     var citaEditable by remember { mutableStateOf("") }
-    var citaOriginal by remember { mutableStateOf("") } // Para saber qué cita se está editando
+    var citaOriginal by remember { mutableStateOf("") } // Para saber cuál se edita
 
     Box(
         modifier = Modifier
@@ -83,6 +91,7 @@ fun CitaScreen(
                 .padding(bottom = 100.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Botón "Volver"
             IconButton(
                 onClick = { navController.popBackStack() },
                 modifier = Modifier.align(Alignment.Start)
@@ -95,6 +104,7 @@ fun CitaScreen(
             }
             Spacer(modifier = Modifier.height(16.dp))
 
+            // Mostrar imagen
             val context = LocalContext.current
             val resourceId = context.resources.getIdentifier(
                 bio.imageResName,
@@ -125,55 +135,58 @@ fun CitaScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // -- CAMBIO 2: Iteramos sobre las citas limpias --
                 val citasNoVacias = citasList.filter { it.isNotBlank() }
 
                 if (citasNoVacias.isEmpty()) {
                     Text("Ninguna cita añadida.")
                 } else {
-                citasList.forEach { cita ->
-                    Card(
-                        modifier = Modifier
-                            .padding(bottom = 8.dp)
-                            .fillMaxWidth(),
-                        elevation = CardDefaults.elevatedCardElevation(4.dp)
-                    ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
-                            Text(
-                                text = cita,
-                                fontStyle = FontStyle.Italic,
-                                fontSize = 14.sp
-                            )
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.End
-                            ) {
-                                TextButton(
-                                    onClick = {
-                                        citaOriginal = cita // Guarda la cita original
-                                        citaEditable = cita // Llena el textField con la cita actual
-                                        showEditDialog = true // Muestra el cuadro de edición
-                                    }
+                    citasNoVacias.forEach { cita ->
+                        Card(
+                            modifier = Modifier
+                                .padding(bottom = 8.dp)
+                                .fillMaxWidth(),
+                            elevation = CardDefaults.elevatedCardElevation(4.dp)
+                        ) {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Text(
+                                    text = cita,
+                                    fontStyle = FontStyle.Italic,
+                                    fontSize = 14.sp
+                                )
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.End
                                 ) {
-                                    Text("Modificar")
-                                }
-
-                                TextButton(
-                                    onClick = {
-                                        viewModel.deleteCita(bio.id, cita)
-                                        citasList = citasList.filterNot { it == cita }
+                                    TextButton(
+                                        onClick = {
+                                            citaOriginal = cita
+                                            citaEditable = cita
+                                            showEditDialog = true
+                                        }
+                                    ) {
+                                        Text("Modificar")
                                     }
-                                ) {
-                                    Text("Eliminar")
-                                }
 
+                                    TextButton(
+                                        onClick = {
+                                            // Eliminamos en la BD
+                                            viewModel.deleteCita(bio.id, cita)
+                                            // Eliminamos en la UI
+                                            citasList = citasList.filterNot { it == cita }
+                                        }
+                                    ) {
+                                        Text("Eliminar")
+                                    }
+                                }
                             }
                         }
                     }
                 }
             }
         }
-        }
 
+        // FAB para añadir nueva cita
         FloatingActionButton(
             onClick = { showDialog = true },
             modifier = Modifier
@@ -203,12 +216,15 @@ fun CitaScreen(
                 confirmButton = {
                     TextButton(
                         onClick = {
-                            if (nuevaCita.isNotEmpty()) {
-                                viewModel.addCita(bio.id, nuevaCita)
-                                citasList = citasList + nuevaCita
-                                nuevaCita = ""
-                                showDialog = false
+                            // -- CAMBIO 3: Evitamos añadir cita vacía --
+                            val citaLimpia = nuevaCita.trim()
+                            if (citaLimpia.isNotEmpty()) {
+                                viewModel.addCita(bio.id, citaLimpia)
+                                citasList = citasList + citaLimpia
                             }
+                            // Cerramos el diálogo y reseteamos
+                            nuevaCita = ""
+                            showDialog = false
                         }
                     ) {
                         Text("Añadir")
@@ -222,7 +238,7 @@ fun CitaScreen(
             )
         }
 
-        // Diálogo para modificar cita
+        // Diálogo para modificar una cita
         if (showEditDialog) {
             AlertDialog(
                 onDismissRequest = { showEditDialog = false },
@@ -238,11 +254,14 @@ fun CitaScreen(
                 confirmButton = {
                     TextButton(
                         onClick = {
-                            if (citaEditable.isNotEmpty()) {
-                                viewModel.updateCita(bio.id, citaOriginal, citaEditable)
-                                citasList = citasList.map { if (it == citaOriginal) citaEditable else it }
-                                showEditDialog = false
+                            val citaLimpia = citaEditable.trim()
+                            if (citaLimpia.isNotEmpty()) {
+                                // Actualizamos en la BD
+                                viewModel.updateCita(bio.id, citaOriginal, citaLimpia)
+                                // Y actualizamos en la UI
+                                citasList = citasList.map { if (it == citaOriginal) citaLimpia else it }
                             }
+                            showEditDialog = false
                         }
                     ) {
                         Text("Guardar")
@@ -258,7 +277,6 @@ fun CitaScreen(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewCitaScreen() {
@@ -267,4 +285,3 @@ fun PreviewCitaScreen() {
         CitaScreen(navController, 1)
     }
 }
-

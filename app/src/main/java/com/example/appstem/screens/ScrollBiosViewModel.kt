@@ -103,13 +103,6 @@ class ScrollBiosViewModel(private val cientificasDao: CientificasDao) : ViewMode
     }
 
 
-
-
-
-
-
-
-
     companion object {
         // Definición del Factory para crear instancias del ViewModel utilizando viewModelFactory.
         val factory: ViewModelProvider.Factory = viewModelFactory {
