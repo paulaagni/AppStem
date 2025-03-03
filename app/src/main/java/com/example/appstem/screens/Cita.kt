@@ -58,7 +58,7 @@ fun CitaScreen(
 ) {
     // Obtenemos la lista filtrada desde el ViewModel
     val biosList by viewModel.filteredBios.collectAsState()
-    val bio = biosList.getOrNull(bioIndex) ?: return
+    val bio = biosList.find {it.id == bioIndex} ?: return
 
     // -- CAMBIO 1: Limpiamos y filtramos las citas al inicializar la variable --
     var citasList by remember {
