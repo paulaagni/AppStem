@@ -95,8 +95,7 @@ fun ScrollCitas(
                                     .fillMaxWidth()
                                     .padding(8.dp)
                                     .clickable {
-                                        val index = biosList.indexOf(bio)
-                                        navController.navigate("cita_screen/$index")
+                                        navController.navigate("cita_screen/${bio.id}")
                                     },
                                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                                 border = BorderStroke(1.dp, Color(0xFFCAC4D0))

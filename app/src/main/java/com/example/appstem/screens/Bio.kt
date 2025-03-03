@@ -43,7 +43,7 @@ fun BioScreen(
 ) {
     // Recogemos la lista filtrada y obtenemos la biografía según el índice.
     val biosList by viewModel.filteredBios.collectAsState()
-    val bio = biosList.getOrNull(bioIndex) ?: return
+    val bio = biosList.find {it.id == bioIndex} ?: return
 
     Box(
         modifier = Modifier
